@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_rest_api/core/error/exeption.dart';
 import 'package:flutter_rest_api/feature/data/models/person_model.dart';
-import 'package:flutter_rest_api/feature/domain/usecases/get_all_persons.dart';
 import 'package:http/http.dart' as http;
 
 abstract class PersonRemoteDataSource {
