@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rest_api/feature/presentation/bloc/person_list_cubit/person_list_cubit.dart';
+import 'package:flutter_rest_api/feature/presentation/bloc/search_bloc/search_bloc.dart';
+import 'package:flutter_rest_api/feature/presentation/pages/person_screen.dart';
+import 'package:flutter_rest_api/locator_service.dart' as di;
+import 'package:flutter_rest_api/locator_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -9,33 +17,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PersonListCubit>(
+          create: (context) => sl<PersonListCubit>(),
+        ),
+        BlocProvider<PersonSearchBloc>(
+          create: (context) => sl<PersonSearchBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData.dark().copyWith(
+          backgroundColor: Colors.black,
+          scaffoldBackgroundColor: Colors.grey,
+        ),
+        home: const HomePage(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(),
     );
   }
 }
