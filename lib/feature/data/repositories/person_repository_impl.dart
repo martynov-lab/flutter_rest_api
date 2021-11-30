@@ -19,20 +19,20 @@ class PresonRepositoryImpl implements PersonRepository {
     required this.networkInfo,
   });
   @override
-  Future<Either<Failur, List<PersonEntity>>> getAllPersons(int page) async {
+  Future<Either<Failure, List<PersonEntity>>> getAllPersons(int page) async {
     return await _getPersons(() {
       return remoteDataSource.getAllPersons(page);
     });
   }
 
   @override
-  Future<Either<Failur, List<PersonEntity>>> searchPerson(String query) async {
+  Future<Either<Failure, List<PersonEntity>>> searchPerson(String query) async {
     return await _getPersons(() {
       return remoteDataSource.searchPerson(query);
     });
   }
 
-  Future<Either<Failur, List<PersonModel>>> _getPersons(
+  Future<Either<Failure, List<PersonModel>>> _getPersons(
       Future<List<PersonModel>> Function() getPersons) async {
     if (await networkInfo.isConnected) {
       try {
@@ -40,14 +40,14 @@ class PresonRepositoryImpl implements PersonRepository {
         localDataSource.personsToCache(remotePerson);
         return Right(remotePerson);
       } on ServerExeption {
-        return Left(ServerFailur());
+        return Left(ServerFailure());
       }
     } else {
       try {
         final locationPerson = await localDataSource.getLastPersonsFromCache();
         return Right(locationPerson);
       } on CacheException {
-        return Left(CacheFailur());
+        return Left(CacheFailure());
       }
     }
   }
