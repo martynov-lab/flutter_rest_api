@@ -40,8 +40,8 @@ class PersonLocalDataSourceImp implements PersonLocalDataSource {
 
     sharedPreferences.setStringList(cachedPersonsList, jsonPersonList);
 
-    // ignore: avoid_print
     print('Persons to write Cache: ${jsonPersonList.length}');
+
     return Future.value(jsonPersonList);
   }
 }
