@@ -5,7 +5,8 @@ import 'package:flutter_rest_api/feature/presentation/bloc/person_list_cubit/per
 import 'package:flutter_rest_api/feature/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:flutter_rest_api/feature/presentation/pages/person_screen.dart';
 import 'package:flutter_rest_api/locator_service.dart' as di;
-import 'package:flutter_rest_api/locator_service.dart';
+
+import 'locator_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +22,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PersonListCubit>(
-          create: (context) => sl<PersonListCubit>()..loadPerson(),
-        ),
+            create: (context) => sl<PersonListCubit>()..loadPerson()),
         BlocProvider<PersonSearchBloc>(
-          create: (context) => sl<PersonSearchBloc>(),
-        ),
+            create: (context) => sl<PersonSearchBloc>()),
       ],
       child: MaterialApp(
         theme: ThemeData.dark().copyWith(

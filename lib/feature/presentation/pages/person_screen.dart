@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rest_api/feature/presentation/widgets/custom_search_delegate.dart';
 import 'package:flutter_rest_api/feature/presentation/widgets/persons_list_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.search),
             color: Colors.white,
             onPressed: () {
-              // showSearch(context: context, delegate: CustomSearchDelegate());
+              showSearch(context: context, delegate: CustomSearchDelegate());
             },
           )
         ],

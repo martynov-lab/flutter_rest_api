@@ -35,7 +35,7 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<PersonRemoteDataSource>(
-    () => PersonRemoteDataSourceImp(client: http.Client()),
+    () => PersonRemoteDataSourceImp(client: sl()),
   );
 
   sl.registerLazySingleton<PersonLocalDataSource>(
