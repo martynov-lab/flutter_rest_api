@@ -33,10 +33,8 @@ class PersonDetailPage extends StatelessWidget {
             ),
             Container(
               child: PersonCasheImage(
-                height: 260,
-                width: 260,
-                imageUrl: person.image,
-              ),
+                  height: 260, width: 260, imageUrl: person.images //image,
+                  ),
             ),
             const SizedBox(
               height: 12,
@@ -48,7 +46,7 @@ class PersonDetailPage extends StatelessWidget {
                   height: 12,
                   width: 12,
                   decoration: BoxDecoration(
-                    color: person.status == 'Alive' ? Colors.green : Colors.red,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
@@ -56,7 +54,7 @@ class PersonDetailPage extends StatelessWidget {
                   width: 8,
                 ),
                 Text(
-                  person.status,
+                  person.name,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -66,14 +64,13 @@ class PersonDetailPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            if (person.type.isNotEmpty) ...buildText('Type:', person.type),
-            ...buildText('Gender:', person.gender),
-            ...buildText(
-                'Number of episodes:', person.episode.length.toString()),
-            ...buildText('Species:', person.species),
-            ...buildText('Last known location:', person.location.name),
-            ...buildText('Origin:', person.origin.name),
-            ...buildText('Was created:', person.created.toString()),
+            // if (person.type.isNotEmpty)
+            ...buildText('Relatives:', person.relatives),
+            ...buildText('Gender:', person.appearance.gender),
+            ...buildText('Work:', person.work),
+            ...buildText('Full Name:', person.biography.fullName),
+            ...buildText('First Appearance:', person.biography.firstAppearance),
+            ...buildText('Place Of Birth:', person.biography.placeOfBirth),
           ],
         ),
       ),

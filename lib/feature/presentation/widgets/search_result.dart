@@ -26,7 +26,7 @@ class SearchResult extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: PersonCasheImage(
-                imageUrl: personResult.image,
+                imageUrl: personResult.images,
               ),
             ),
             Padding(
@@ -42,7 +42,7 @@ class SearchResult extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(
-                personResult.location.name,
+                personResult.relatives,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

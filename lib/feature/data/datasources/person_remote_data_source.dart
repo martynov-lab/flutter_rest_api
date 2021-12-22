@@ -8,7 +8,7 @@ abstract class PersonRemoteDataSource {
   /// Calls the https://rickandmortyapi.com/api/character/?page=1 endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
-  Future<List<PersonModel>> getAllPersons(int page);
+  Future<List<PersonModel>> getAllPersons();
 
   /// Calls the https://rickandmortyapi.com/api/character/?name=rick endpoint.
   ///
@@ -22,12 +22,14 @@ class PersonRemoteDataSourceImp implements PersonRemoteDataSource {
   PersonRemoteDataSourceImp({required this.client});
 
   @override
-  Future<List<PersonModel>> getAllPersons(int page) => _getPersonFromUrl(
-      'https://rickandmortyapi.com/api/character/?page=$page');
+  Future<List<PersonModel>> getAllPersons() => _getPersonFromUrl(
+      'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json');
+  //'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json'
 
   @override
   Future<List<PersonModel>> searchPerson(String query) => _getPersonFromUrl(
-      'https://rickandmortyapi.com/api/character/?name=$query');
+      'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/name/$query.json');
+  //'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/name/$query.json'
 
   Future<List<PersonModel>> _getPersonFromUrl(String url) async {
     print(url);
@@ -35,7 +37,7 @@ class PersonRemoteDataSourceImp implements PersonRemoteDataSource {
         .get(Uri.parse(url), headers: {'Contert-Type': 'application/json'});
     if (response.statusCode == 200) {
       final person = json.decode(response.body);
-      return (person['results'] as List)
+      return (person as List)
           .map((person) => PersonModel.fromJson(person))
           .toList();
     } else {

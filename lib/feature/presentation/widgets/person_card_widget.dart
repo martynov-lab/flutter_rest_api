@@ -8,6 +8,51 @@ class PersonCard extends StatelessWidget {
   final PersonEntity person;
   const PersonCard({Key? key, required this.person}) : super(key: key);
 
+  Widget _powerStats(String namePower, int value) {
+    return Row(
+      children: <Widget>[
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          namePower,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Expanded(
+          child: Text(
+            '$value',
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        //Expanded(
+        //child:
+        Container(
+          height: 8,
+          width: double.parse('$value'),
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        //),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,7 +75,7 @@ class PersonCard extends StatelessWidget {
               child: PersonCasheImage(
                 height: 166,
                 width: 166,
-                imageUrl: person.image,
+                imageUrl: person.images,
               ),
             ),
             const SizedBox(
@@ -54,38 +99,67 @@ class PersonCard extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        height: 8,
-                        width: 8,
-                        decoration: BoxDecoration(
-                          color: person.status == 'Alive'
-                              ? Colors.green
-                              : Colors.red,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Expanded(
-                        child: Text(
-                          '${person.status} - ${person.species}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
+                  _powerStats('intelligence:', person.powerstats.intelligence),
+                  _powerStats('strength:', person.powerstats.strength),
+                  _powerStats('speed:', person.powerstats.speed),
+                  _powerStats('durability:', person.powerstats.durability),
+                  _powerStats('power:', person.powerstats.power),
+                  _powerStats('combat:', person.powerstats.combat),
+                  // Row(
+                  //   children: <Widget>[
+                  //     //intelligence;
+                  //     //strength;
+                  //     //speed;
+                  //     //durability;
+                  //     //power;
+                  //     //combat;
+
+                  //     const SizedBox(
+                  //       width: 8,
+                  //     ),
+                  //     const Text(
+                  //       'intelligence:',
+                  //       style: TextStyle(
+                  //         color: Colors.white,
+                  //       ),
+                  //       maxLines: 1,
+                  //       overflow: TextOverflow.ellipsis,
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 8,
+                  //     ),
+                  //     Expanded(
+                  //       child: Text(
+                  //         '${person.powerstats.intelligence}',
+                  //         style: const TextStyle(
+                  //           color: Colors.white,
+                  //         ),
+                  //         maxLines: 1,
+                  //         overflow: TextOverflow.ellipsis,
+                  //       ),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 8,
+                  //     ),
+                  //     Expanded(
+                  //       child: Container(
+                  //         height: 8,
+                  //         width: double.parse(
+                  //                 '${person.powerstats.intelligence}') /
+                  //             100,
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.green,
+                  //           borderRadius: BorderRadius.circular(4),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 12,
                   ),
                   const Text(
-                    'Last known location:',
+                    'Gender:',
                     style: TextStyle(
                       color: AppColors.greyColor,
                     ),
@@ -94,7 +168,7 @@ class PersonCard extends StatelessWidget {
                     height: 4,
                   ),
                   Text(
-                    person.location.name,
+                    person.appearance.gender,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -105,7 +179,7 @@ class PersonCard extends StatelessWidget {
                     height: 12,
                   ),
                   const Text(
-                    'Origin:',
+                    'Eye Color:',
                     style: TextStyle(
                       color: AppColors.greyColor,
                     ),
@@ -114,7 +188,7 @@ class PersonCard extends StatelessWidget {
                     height: 4,
                   ),
                   Text(
-                    person.origin.name,
+                    person.appearance.eyeColor,
                     style: const TextStyle(
                       color: Colors.white,
                     ),

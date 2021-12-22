@@ -19,9 +19,9 @@ class PresonRepositoryImpl implements PersonRepository {
     required this.networkInfo,
   });
   @override
-  Future<Either<Failure, List<PersonEntity>>> getAllPersons(int page) async {
+  Future<Either<Failure, List<PersonEntity>>> getAllPersons() async {
     return await _getPersons(() {
-      return remoteDataSource.getAllPersons(page);
+      return remoteDataSource.getAllPersons();
     });
   }
 

@@ -1,51 +1,42 @@
-import 'package:flutter_rest_api/feature/data/models/location_model.dart';
 import 'package:flutter_rest_api/feature/domain/entities/person_entity.dart';
+
+import 'appearance_model.dart';
+import 'biography_model.dart';
+import 'powerstats_model.dart';
 
 class PersonModel extends PersonEntity {
   const PersonModel({
     required id,
     required name,
-    required status,
-    required species,
-    required type,
-    required gender,
-    required origin,
-    required location,
-    required image,
-    required episode,
-    required created,
+    required powerstats,
+    required appearance,
+    required biography,
+    required work,
+    required relatives,
+    required images,
   }) : super(
           id: id,
           name: name,
-          status: status,
-          species: species,
-          type: type,
-          gender: gender,
-          origin: origin,
-          location: location,
-          image: image,
-          episode: episode,
-          created: created,
+          powerstats: powerstats,
+          appearance: appearance,
+          biography: biography,
+          work: work,
+          relatives: relatives,
+          images: images,
         );
 
   factory PersonModel.fromJson(Map<String, dynamic> json) {
     return PersonModel(
       id: json['id'] as int,
       name: json['name'] as String,
-      status: json['status'] as String,
-      species: json['species'] as String,
-      type: json['type'] as String,
-      gender: json['gender'] as String,
-      origin: json['origin'] != null
-          ? LocationModel.fromJson(json['origin'])
-          : null,
-      location: json['location'] != null
-          ? LocationModel.fromJson(json['location'])
-          : null,
-      image: json['image'] as String,
-      episode:
-          (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
-      created: DateTime.parse(json['created'] as String),
+      powerstats: PowerstatsModel.fromJson(json['powerstats']),
+      appearance:
+          AppearanceModel.fromJson(json['appearance'] as Map<String, dynamic>),
+      biography:
+          BiographyModel.fromJson(json['biography'] as Map<String, dynamic>),
+      work: json['work']['occupation'] as String,
+      relatives: json['connections']['relatives'] as String,
+      images: json['images']['lg'] as String,
     );
   }
 
@@ -53,15 +44,12 @@ class PersonModel extends PersonEntity {
     return {
       'id': id,
       'name': name,
-      'status': status,
-      'species': species,
-      'type': type,
-      'gender': gender,
-      'origin': origin,
-      'location': location,
-      'image': image,
-      'episode': episode,
-      'created': created.toIso8601String(),
+      'powerstats': powerstats,
+      'appearance': appearance,
+      'biography': biography,
+      'work': work,
+      'relatives': relatives,
+      'images': images,
     };
   }
 }
