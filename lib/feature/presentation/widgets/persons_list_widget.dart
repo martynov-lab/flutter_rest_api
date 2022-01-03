@@ -28,12 +28,11 @@ class PersonsList extends StatelessWidget {
     return BlocBuilder<PersonListCubit, PersonState>(
         builder: (BuildContext context, state) {
       List<PersonEntity> persons = [];
-      bool isLoading = false;
+
       if (state is PersonLoading && state.isFirstfeatch) {
         return _loadingIndicator();
       } else if (state is PersonLoading) {
         persons = state.oldPersonsList;
-        isLoading = true;
       } else if (state is PersonLoaded) {
         persons = state.personsList;
       } else if (state is PersonError) {
@@ -61,7 +60,7 @@ class PersonsList extends StatelessWidget {
             color: Colors.grey[400],
           );
         },
-        itemCount: persons.length + (isLoading ? 1 : 0),
+        itemCount: persons.length,
       );
     });
   }

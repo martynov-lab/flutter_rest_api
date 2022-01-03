@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rest_api/feature/domain/entities/person_entity.dart';
-import 'package:flutter_rest_api/feature/domain/usecases/search_person.dart';
+//import 'package:flutter_rest_api/feature/domain/usecases/search_person.dart';
 import 'package:flutter_rest_api/feature/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:flutter_rest_api/feature/presentation/bloc/search_bloc/search_event.dart';
 import 'package:flutter_rest_api/feature/presentation/bloc/search_bloc/search_state.dart';
@@ -11,11 +11,12 @@ class CustomSearchDelegate extends SearchDelegate {
   CustomSearchDelegate() : super(searchFieldLabel: 'Search for characters...');
 
   final _suggestions = [
-    'Rick',
-    'Morty',
-    'Summer',
-    'Beth',
-    'Jerry',
+    'Alien',
+    'Batman',
+    'Captain America',
+    'Hulk',
+    'Joker',
+    'Superman',
   ];
 
   @override

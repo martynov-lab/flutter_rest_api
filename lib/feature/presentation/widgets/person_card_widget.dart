@@ -10,45 +10,42 @@ class PersonCard extends StatelessWidget {
 
   Widget _powerStats(String namePower, int value) {
     return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        const SizedBox(
-          width: 8,
-        ),
-        Text(
-          namePower,
-          style: const TextStyle(
-            color: Colors.white,
+        Container(
+          width: 110,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                namePower,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                '$value',
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
           ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
-        const SizedBox(
-          width: 8,
-        ),
-        Expanded(
-          child: Text(
-            '$value',
-            style: const TextStyle(
-              color: Colors.white,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        //Expanded(
-        //child:
         Container(
           height: 8,
-          width: double.parse('$value'),
+          width: double.parse('$value') / 2,
           decoration: BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.circular(4),
           ),
         ),
-        //),
       ],
     );
   }
@@ -73,7 +70,7 @@ class PersonCard extends StatelessWidget {
           children: <Widget>[
             Container(
               child: PersonCasheImage(
-                height: 166,
+                height: 250,
                 width: 166,
                 imageUrl: person.images,
               ),
@@ -85,9 +82,6 @@ class PersonCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 12,
-                  ),
                   Text(
                     person.name,
                     style: const TextStyle(
@@ -97,7 +91,7 @@ class PersonCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 4,
+                    height: 12,
                   ),
                   _powerStats('intelligence:', person.powerstats.intelligence),
                   _powerStats('strength:', person.powerstats.strength),
@@ -105,99 +99,147 @@ class PersonCard extends StatelessWidget {
                   _powerStats('durability:', person.powerstats.durability),
                   _powerStats('power:', person.powerstats.power),
                   _powerStats('combat:', person.powerstats.combat),
-                  // Row(
-                  //   children: <Widget>[
-                  //     //intelligence;
-                  //     //strength;
-                  //     //speed;
-                  //     //durability;
-                  //     //power;
-                  //     //combat;
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Race:',
+                        style: TextStyle(
+                          color: AppColors.greyColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        person.appearance.race!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Gender:',
+                        style: TextStyle(
+                          color: AppColors.greyColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        person.appearance.gender,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Hair Color:',
+                        style: TextStyle(
+                          color: AppColors.greyColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        person.appearance.hairColor,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Eye Color:',
+                        style: TextStyle(
+                          color: AppColors.greyColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        person.appearance.eyeColor,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
 
-                  //     const SizedBox(
-                  //       width: 8,
-                  //     ),
-                  //     const Text(
-                  //       'intelligence:',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //       ),
-                  //       maxLines: 1,
-                  //       overflow: TextOverflow.ellipsis,
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 8,
-                  //     ),
-                  //     Expanded(
-                  //       child: Text(
-                  //         '${person.powerstats.intelligence}',
-                  //         style: const TextStyle(
-                  //           color: Colors.white,
-                  //         ),
-                  //         maxLines: 1,
-                  //         overflow: TextOverflow.ellipsis,
-                  //       ),
-                  //     ),
-                  //     const SizedBox(
-                  //       width: 8,
-                  //     ),
-                  //     Expanded(
-                  //       child: Container(
-                  //         height: 8,
-                  //         width: double.parse(
-                  //                 '${person.powerstats.intelligence}') /
-                  //             100,
-                  //         decoration: BoxDecoration(
-                  //           color: Colors.green,
-                  //           borderRadius: BorderRadius.circular(4),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ],
+                  // const Text(
+                  //   'Gender:',
+                  //   style: TextStyle(
+                  //     color: AppColors.greyColor,
+                  //   ),
                   // ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Text(
-                    'Gender:',
-                    style: TextStyle(
-                      color: AppColors.greyColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    person.appearance.gender,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Text(
-                    'Eye Color:',
-                    style: TextStyle(
-                      color: AppColors.greyColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    person.appearance.eyeColor,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  // const SizedBox(
+                  //   height: 4,
+                  // ),
+                  // Text(
+                  //   person.appearance.gender,
+                  //   style: const TextStyle(
+                  //     color: Colors.white,
+                  //   ),
+                  //   maxLines: 1,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
+                  // const SizedBox(
+                  //   height: 12,
+                  // ),
+                  // const Text(
+                  //   'Eye Color:',
+                  //   style: TextStyle(
+                  //     color: AppColors.greyColor,
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 4,
+                  // ),
+                  // Text(
+                  //   person.appearance.eyeColor,
+                  //   style: const TextStyle(
+                  //     color: Colors.white,
+                  //   ),
+                  //   maxLines: 1,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
                 ],
               ),
             ),

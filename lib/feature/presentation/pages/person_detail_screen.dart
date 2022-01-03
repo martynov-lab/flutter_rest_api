@@ -31,46 +31,47 @@ class PersonDetailPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            Container(
-              child: PersonCasheImage(
-                  height: 260, width: 260, imageUrl: person.images //image,
-                  ),
-            ),
+            PersonCasheImage(
+                height: 260, width: 260, imageUrl: person.images //image,
+                ),
+
             const SizedBox(
               height: 12,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  height: 12,
-                  width: 12,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  person.name,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+
+            Text(
+              person.name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
+
             const SizedBox(
               height: 16,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                //mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ...buildText('Relatives:', person.relatives),
+                  //...buildText('Gender:', person.appearance.gender),
+                  ...buildText('Work:', person.work),
+                  ...buildText('Full Name:', person.biography.fullName),
+                  ...buildText(
+                      'First Appearance:', person.biography.firstAppearance),
+                  ...buildText(
+                      'Place Of Birth:', person.biography.placeOfBirth),
+                ],
+              ),
+            ),
             // if (person.type.isNotEmpty)
-            ...buildText('Relatives:', person.relatives),
-            ...buildText('Gender:', person.appearance.gender),
-            ...buildText('Work:', person.work),
-            ...buildText('Full Name:', person.biography.fullName),
-            ...buildText('First Appearance:', person.biography.firstAppearance),
-            ...buildText('Place Of Birth:', person.biography.placeOfBirth),
           ],
         ),
       ),

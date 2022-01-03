@@ -3,14 +3,14 @@ import 'package:flutter_rest_api/feature/domain/entities/person_entity.dart';
 class AppearanceModel extends AppearanceEntity {
   AppearanceModel({
     gender,
-    //race,
+    race,
     //height,
     //weight,
     eyeColor,
     hairColor,
   }) : super(
           gender: gender,
-          //race:race,
+          race: race,
           //height:height,
           //weight:weight,
           eyeColor: eyeColor,
@@ -20,9 +20,9 @@ class AppearanceModel extends AppearanceEntity {
   factory AppearanceModel.fromJson(Map<String, dynamic> json) {
     return AppearanceModel(
       gender: json['gender'] as String,
-      //race: json['race'] as String,
-      //height: json['height'][1] as String,
-      //weight: json['weight'][1] as String,
+      race: json['race'] ?? '-',
+      //height: json['height'] as String,
+      //weight: json['weight'] as String,
       eyeColor: json['eyeColor'] as String,
       hairColor: json['hairColor'] as String,
     );
@@ -31,7 +31,7 @@ class AppearanceModel extends AppearanceEntity {
   Map<String, dynamic> toJson() {
     return {
       'gender': gender,
-      //'race':race,
+      'race': race,
       //'height':height,
       //'weight':weight,
       'eyeColor': eyeColor,

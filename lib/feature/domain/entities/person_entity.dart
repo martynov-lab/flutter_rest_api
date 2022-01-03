@@ -53,14 +53,14 @@ class PowerstatsEntity {
 
 class AppearanceEntity {
   final String gender;
-  //final String race;
+  final String? race;
   //final String height;
   //final String weight;
   final String eyeColor;
   final String hairColor;
   AppearanceEntity({
     required this.gender,
-    //required this.race,
+    required this.race,
     //required this.height,
     //required this.weight,
     required this.eyeColor,

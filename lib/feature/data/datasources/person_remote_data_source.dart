@@ -24,12 +24,19 @@ class PersonRemoteDataSourceImp implements PersonRemoteDataSource {
   @override
   Future<List<PersonModel>> getAllPersons() => _getPersonFromUrl(
       'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json');
-  //'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json'
 
   @override
-  Future<List<PersonModel>> searchPerson(String query) => _getPersonFromUrl(
-      'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/name/$query.json');
-  //'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/name/$query.json'
+  Future<List<PersonModel>> searchPerson(String query) async {
+    List<PersonModel> persons = await _getPersonFromUrl(
+        'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json');
+    List<PersonModel> searchPersons = [];
+    for (var item in persons) {
+      if (query == item.name) {
+        searchPersons.add(item);
+      }
+    }
+    return searchPersons;
+  }
 
   Future<List<PersonModel>> _getPersonFromUrl(String url) async {
     print(url);
