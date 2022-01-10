@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rest_api/common/app_colors.dart';
 import 'package:flutter_rest_api/feature/domain/entities/person_entity.dart';
 import 'package:flutter_rest_api/feature/presentation/widgets/peson_cache_widget.dart';
 
@@ -15,43 +14,37 @@ class PersonDetailPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             const SizedBox(
               height: 24,
             ),
-            Text(
-              person.name,
-              style: const TextStyle(
-                fontSize: 28,
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            PersonCasheImage(
-                height: 260, width: 260, imageUrl: person.images //image,
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                person.name,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
                 ),
-
+              ),
+            ),
             const SizedBox(
               height: 12,
             ),
-
-            Text(
-              person.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
+            ClipRRect(
+              borderRadius:
+                  const BorderRadius.horizontal(right: Radius.circular(10.0)),
+              child: PersonCasheImage(
+                height: 350,
+                width: double.infinity,
+                imageUrl: person.images,
               ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
-
             const SizedBox(
-              height: 16,
+              height: 12,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -71,7 +64,6 @@ class PersonDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            // if (person.type.isNotEmpty)
           ],
         ),
       ),
@@ -82,14 +74,18 @@ class PersonDetailPage extends StatelessWidget {
     return [
       Text(
         text,
-        style: const TextStyle(color: AppColors.greyColor),
+        style: const TextStyle(
+          fontSize: 16,
+        ),
       ),
       const SizedBox(
         height: 4,
       ),
       Text(
         value,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+          fontSize: 14,
+        ),
       ),
       const SizedBox(
         height: 12,

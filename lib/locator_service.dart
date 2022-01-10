@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'feature/presentation/bloc/theme_bloc/theme_bloc.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -22,6 +24,7 @@ Future<void> init() async {
   sl.registerFactory(
     () => PersonSearchBloc(searchPerson: sl()),
   );
+  //sl.registerFactory(() => ThemeBloc(sl()));
   // UseCases
   sl.registerLazySingleton(() => GetAllPersons(sl()));
   sl.registerLazySingleton(() => SearchPerson(sl()));

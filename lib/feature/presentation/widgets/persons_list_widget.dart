@@ -10,26 +10,15 @@ import 'package:flutter_rest_api/feature/presentation/widgets/person_card_widget
 class PersonsList extends StatelessWidget {
   final scrollController = ScrollController();
 
-  void setUpScrollController(BuildContext context) {
-    scrollController.addListener(() {
-      if (scrollController.position.atEdge) {
-        if (scrollController.position.pixels != 0) {
-          //BlocProvider.of<PersonListCubit>(context).loadPerson();
-          context.read<PersonListCubit>().loadPerson();
-        }
-      }
-    });
-  }
+  PersonsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    setUpScrollController(context);
-
     return BlocBuilder<PersonListCubit, PersonState>(
         builder: (BuildContext context, state) {
       List<PersonEntity> persons = [];
 
-      if (state is PersonLoading && state.isFirstfeatch) {
+      if (state is PersonLoading) {
         return _loadingIndicator();
       } else if (state is PersonLoading) {
         persons = state.oldPersonsList;
@@ -42,7 +31,7 @@ class PersonsList extends StatelessWidget {
               fontSize: 25,
             ));
       }
-      return ListView.separated(
+      return ListView.builder(
         controller: scrollController,
         itemBuilder: (context, index) {
           if (index < persons.length) {
@@ -54,11 +43,6 @@ class PersonsList extends StatelessWidget {
             });
             return _loadingIndicator();
           }
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey[400],
-          );
         },
         itemCount: persons.length,
       );

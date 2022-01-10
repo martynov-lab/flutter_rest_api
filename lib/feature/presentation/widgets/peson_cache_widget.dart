@@ -15,12 +15,6 @@ class PersonCasheImage extends StatelessWidget {
   Widget _imageWidget(ImageProvider imageProvider) {
     return Container(
       decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(8),
-        // borderRadius: const BorderRadius.only(
-        //   topLeft: Radius.circular(8),
-        //   bottomLeft: Radius.circular(8),
-
-        // ),
         image: DecorationImage(
           image: imageProvider,
           fit: BoxFit.cover,
@@ -31,21 +25,24 @@ class PersonCasheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      width: width,
-      height: height,
-      imageUrl: imageUrl,
-      imageBuilder: (context, imageProvider) {
-        return _imageWidget(imageProvider);
-      },
-      placeholder: (context, url) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-      errorWidget: (context, url, error) {
-        return _imageWidget(const AssetImage('assets/images/noimage.jpg'));
-      },
+    return ClipRRect(
+      borderRadius: const BorderRadius.horizontal(left: Radius.circular(10.0)),
+      child: CachedNetworkImage(
+        width: width,
+        height: height,
+        imageUrl: imageUrl,
+        imageBuilder: (context, imageProvider) {
+          return _imageWidget(imageProvider);
+        },
+        placeholder: (context, url) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+        errorWidget: (context, url, error) {
+          return _imageWidget(const AssetImage('assets/images/noimage.jpg'));
+        },
+      ),
     );
   }
 }

@@ -15,9 +15,8 @@ class PersonEmpty extends PersonState {
 
 class PersonLoading extends PersonState {
   final List<PersonEntity> oldPersonsList;
-  final bool isFirstfeatch;
 
-  const PersonLoading(this.oldPersonsList, {this.isFirstfeatch = false});
+  const PersonLoading(this.oldPersonsList);
 
   @override
   List<Object> get props => [oldPersonsList];

@@ -23,8 +23,6 @@ class PersonLocalDataSourceImp implements PersonLocalDataSource {
   Future<List<PersonModel>> getLastPersonsFromCache() {
     final jsonPersonsList = sharedPreferences.getStringList(cachedPersonsList);
     if (jsonPersonsList!.isNotEmpty) {
-      // ignore: avoid_print
-      print('Get Persons from Cache: ${jsonPersonsList.length}');
       return Future.value(jsonPersonsList
           .map((person) => PersonModel.fromJson(json.decode(person)))
           .toList());
@@ -34,14 +32,10 @@ class PersonLocalDataSourceImp implements PersonLocalDataSource {
   }
 
   @override
-  Future<void> personsToCache(List<PersonModel> persons) {
+  Future<List<String>> personsToCache(List<PersonModel> persons) {
     final List<String> jsonPersonList =
         persons.map((person) => json.encode(person.toJson())).toList();
-
     sharedPreferences.setStringList(cachedPersonsList, jsonPersonList);
-
-    print('Persons to write Cache: ${jsonPersonList.length}');
-
     return Future.value(jsonPersonList);
   }
 }

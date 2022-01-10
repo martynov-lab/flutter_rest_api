@@ -15,7 +15,7 @@ class PersonSearchBloc extends Bloc<PersonSearchEvent, PersonSearchState> {
       SearchPersons event, Emitter<PersonSearchState> emit) async {
     emit(PersonSearchLoading());
     final failureOrPerson =
-        await searchPerson(SearchPersonParams(query: event.personQuery));
+        await searchPerson.searchPersonBy(event.personQuery);
     emit(failureOrPerson.fold(
         (failure) => PersonSearchError(message: _mapFailureToMessage(failure)),
         (person) => PersonSearchLoaded(persons: person)));
@@ -32,38 +32,3 @@ class PersonSearchBloc extends Bloc<PersonSearchEvent, PersonSearchState> {
     }
   }
 }
-
-// class PersonSearchBloc extends Bloc<PersonSearchEvent, PersonSearchState> {
-//   final SearchPerson searchPerson;
-//   PersonSearchBloc({required this.searchPerson}) : super(PersonSearchEmpty());
-
-//   //@override
-//   Stream<PersonSearchState> mapEventToState(PersonSearchEvent event) async* {
-//     if (event is SearchPersons) {
-//       yield* _mapFetchPersonsToState(event.personQuery);
-//     }
-//   }
-
-//   Stream<PersonSearchState> _mapFetchPersonsToState(String personQuery) async* {
-//     yield PersonSearchLoading();
-
-//     final failureOrPerson =
-//         await searchPerson(SearchPersonParams(query: personQuery));
-
-//     yield failureOrPerson.fold(
-//       (failure) => PersonSearchError(message: _mapFailurToMessage(failure)),
-//       (person) => PersonSearchLoaded(persons: person),
-//     );
-//   }
-
-//   String _mapFailurToMessage(Failure failure) {
-//     switch (failure.runtimeType) {
-//       case ServerFailure:
-//         return 'Server Failure';
-//       case CacheFailure:
-//         return 'Cache Failure';
-//       default:
-//         return 'Unexpected Error';
-//     }
-//   }
-// }
